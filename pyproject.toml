@@ -1,0 +1,63 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "symdisc"               # TODO: choose final name
+version = "0.1.0"
+description = "Level-set estimation, symmetry and equivariant discovery via PCA/SVD on Jacobian-built matrices"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Ben Shaw" }]
+keywords = ["symmetry", "equivariance", "PCA", "Lie groups", "vector fields", "level set"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Intended Audience :: Science/Research",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+  "Topic :: Scientific/Engineering :: Mathematics"
+]
+
+dependencies = [
+  "numpy>=1.24",
+  "scikit-learn>=1.3",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=7.0",
+  "pytest-cov",
+  "ruff>=0.5",
+  "black>=24.0",
+  "mypy>=1.7",
+  "pre-commit>=3.6",
+]
+docs = [
+  "mkdocs>=1.6",
+  "mkdocs-material>=9.5",
+  "griffe>=0.48",            # optional for mkdocstrings
+  "mkdocstrings[python]>=0.25",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.black]
+line-length = 100
+target-version = ["py310"]
+
+[tool.ruff]
+line-length = 100
+select = ["E", "F", "I", "UP", "B"]
+ignore = []
+exclude = ["docs"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.mypy]
+python_version = "3.10"
+ignore_missing_imports = true
+strict = false
